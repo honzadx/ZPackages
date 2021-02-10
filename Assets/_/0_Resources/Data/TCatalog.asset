@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a79c9b3840d5e540b1e45f7c0747eea, type: 3}
+  m_Name: TCatalog
+  m_EditorClassIdentifier: 
+  languages:
+  - en
+  - cz
+  translations:
+  - id: audio
+    languageTexts:
+    - language: en
+      text: Audio
+    - language: cz
+      text: Zvuk
+  - id: return
+    languageTexts:
+    - language: en
+      text: Return
+    - language: cz
+      text: "Zp\u011Bt"
+  - id: helloworld
+    languageTexts:
+    - language: en
+      text: Hello world!
+    - language: cz
+      text: "V\xEDtej ve sv\u011Bt\u011B!"
+  - id: language
+    languageTexts:
+    - language: en
+      text: English
+    - language: cz
+      text: "\u010Ce\u0161tina"
+  - id: renew
+    languageTexts:
+    - language: en
+      text: Renew
+    - language: cz
+      text: Obnov
+  - id: changelang
+    languageTexts:
+    - language: en
+      text: Chane language
+    - language: cz
+      text: "Zm\u011Bnit jazyk"
+  - id: next
+    languageTexts:
+    - language: en
+      text: '>'
+    - language: cz
+      text: '>'
+  - id: previous
+    languageTexts:
+    - language: en
+      text: <
+    - language: cz
+      text: <
+  - id: restart
+    languageTexts:
+    - language: en
+      text: Restart
+    - language: cz
+      text: Restartovat
