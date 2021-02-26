@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5162f2a59ae8cd543a2c6e6c79d32464, type: 3}
+  m_Name: Audio_Red
+  m_EditorClassIdentifier: 
+  audioLinks:
+  - id: 1
+    clips:
+    - clip: {fileID: 8300000, guid: 9f6fe51b4ef54bb498031e57f4e91e61, type: 3}
+      volume: 1
+      pitch: 1
+    clip: {fileID: 8300000, guid: 9f6fe51b4ef54bb498031e57f4e91e61, type: 3}
+  - id: 2
+    clips:
+    - clip: {fileID: 8300000, guid: 2ba665539067a00458b0f846168d774f, type: 3}
+      volume: 1
+      pitch: 1
+    clip: {fileID: 8300000, guid: b39442127d775ee4fb786447816f08ea, type: 3}
+  - id: RToFIAwMXAp7
+    clips:
+    - clip: {fileID: 8300000, guid: 3a95a1b69b4b38c45bb53e3655c3db5f, type: 3}
+      volume: 1
+      pitch: 1
+    clip: {fileID: 8300000, guid: 3a95a1b69b4b38c45bb53e3655c3db5f, type: 3}
+  - id: sQnHxVBeIFqU
+    clips:
+    - clip: {fileID: 8300000, guid: b39442127d775ee4fb786447816f08ea, type: 3}
+      volume: 1
+      pitch: 1
+    clip: {fileID: 8300000, guid: 2ba665539067a00458b0f846168d774f, type: 3}
+  mixerGroup: {fileID: 24300002, guid: 1dd6995636268b747b1da9a711ec6cba, type: 2}

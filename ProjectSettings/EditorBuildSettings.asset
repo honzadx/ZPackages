@@ -12,14 +12,11 @@ EditorBuildSettings:
     path: Assets/_/_Main.unity
     guid: e75a39cb0d10f2c46a18599d5669d05b
   - enabled: 1
-    path: Assets/_/Translation.unity
-    guid: dbcb8ae6b3a9b554aae8b9358f644bfe
-  - enabled: 1
-    path: Assets/_/General.unity
-    guid: 7ee14153c42b11345ad7cf22bbdd008a
-  - enabled: 1
     path: Assets/_/Audio.unity
-    guid: 0a0105e22423f30418a8db9923f0a20f
+    guid: 02f9ba665534e0c46a0198f1ee3958e6
+  - enabled: 1
+    path: Assets/_/Move.unity
+    guid: 451244a7446585b4ca3c8836814cabe2
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e284900dc6e6e9b439dad45bab265072,
       type: 2}

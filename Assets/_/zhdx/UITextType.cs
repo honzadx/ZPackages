@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace zhdx
+﻿namespace zhdx
 {
     public enum UITextType
     {

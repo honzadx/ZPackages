@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class ToggleActive : MonoBehaviour
+    namespace General
     {
-        public void Toggle()
+        public class ToggleActive : MonoBehaviour
         {
-            gameObject.SetActive(!gameObject.activeInHierarchy);
+            public void Toggle()
+            {
+                gameObject.SetActive(!gameObject.activeInHierarchy);
+            }
         }
     }
 }

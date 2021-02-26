@@ -4,47 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class Sticker2D : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
+    namespace General
     {
-        [SerializeField]
-        private Canvas canvas = null;
-
-        private RectTransform rectTransform;
-        private Image image;
-        private Color color;
-
-        public void SetCanvas(Canvas canvas) => this.canvas = canvas;
-
-        private void Start()
+        public class Sticker2D : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
         {
-            rectTransform = GetComponent<RectTransform>();
-            image = GetComponent<Image>();
-            color = image.color;
-        }
+            [SerializeField]
+            private Canvas canvas = null;
 
-        public void OnDrag(PointerEventData eventData)
-        {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-            Debug.Log("Mouse Dragging");
-        }
+            private RectTransform rectTransform;
+            private Image image;
+            private Color color;
 
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            color.a = 0.4f;
-            image.color = color;
-        }
+            public void SetCanvas(Canvas canvas) => this.canvas = canvas;
 
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            color.a = 1.0f;
-            image.color = color;
-        }
+            private void Start()
+            {
+                rectTransform = GetComponent<RectTransform>();
+                image = GetComponent<Image>();
+                color = image.color;
+            }
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            transform.SetAsLastSibling();
+            public void OnDrag(PointerEventData eventData)
+            {
+                rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+                Debug.Log("Mouse Dragging");
+            }
+
+            public void OnBeginDrag(PointerEventData eventData)
+            {
+                color.a = 0.4f;
+                image.color = color;
+            }
+
+            public void OnEndDrag(PointerEventData eventData)
+            {
+                color.a = 1.0f;
+                image.color = color;
+            }
+
+            public void OnPointerDown(PointerEventData eventData)
+            {
+                transform.SetAsLastSibling();
+            }
         }
     }
 }

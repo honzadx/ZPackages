@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class OpenTransform : MonoBehaviour
+    namespace General
     {
-        public void SetPosition(Transform target)
+        public class OpenTransform : MonoBehaviour
         {
-            transform.position = target.position;
-        }
+            public void SetPosition(Transform target)
+            {
+                transform.position = target.position;
+            }
 
-        public void SetRotation(Transform target)
-        {
-            transform.rotation = target.rotation;
-        }
+            public void SetRotation(Transform target)
+            {
+                transform.rotation = target.rotation;
+            }
 
-        public void SetTransform(Transform target)
-        {
-            SetPosition(target);
-            SetRotation(target);
+            public void SetTransform(Transform target)
+            {
+                SetPosition(target);
+                SetRotation(target);
+            }
         }
     }
 }

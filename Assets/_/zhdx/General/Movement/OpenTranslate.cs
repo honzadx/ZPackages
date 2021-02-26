@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class OpenTranslate : MonoBehaviour
+    namespace General 
     {
-        [SerializeField]
-        private Vector3 dir = Vector3.zero;
-        [SerializeField]
-        private float speed = 1;
-        [SerializeField]
-        private Space relativeTo = Space.Self;
-
-        private void Start()
+        public class OpenTranslate : MonoBehaviour
         {
-            dir.Normalize();
-        }
+            [SerializeField]
+            private Vector3 dir = Vector3.zero;
+            [SerializeField]
+            private float speed = 1;
+            [SerializeField]
+            private Space relativeTo = Space.Self;
 
-        private void Update()
-        {
-            transform.Translate(dir * speed * Time.deltaTime, relativeTo);
+            private Transform _transform;
+
+            private void Awake()
+            {
+                _transform = GetComponent<Transform>();
+            }
+
+            private void Start()
+            {
+                dir.Normalize();
+            }
+
+            private void Update()
+            {
+                _transform.Translate(dir * speed * Time.deltaTime, relativeTo);
+            }
         }
     }
 }

@@ -1,19 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace zhdx.Subsystems.Translation
+namespace zhdx
 {
-    public class ChangeLanguage : MonoBehaviour
+    namespace Subsystems
     {
-        public void ChangeByUITextValue(UITextValue text)
+        namespace Translation
         {
-            Change(text.GetValueCleared());
-        }
+            public class ChangeLanguage : MonoBehaviour
+            {
+                public void ChangeByUITextValue(UITextValue text)
+                {
+                    Change(text.GetValueCleared());
+                }
 
-        public void Change(string language)
-        {
-            TranslationCatalogManagerSO.Instance.ChangeLanguage(language);
+                public void Change(string language)
+                {
+                    TranslationCatalogManagerSO.Instance.ChangeLanguage(language);
+                }
+            }
         }
     }
 }

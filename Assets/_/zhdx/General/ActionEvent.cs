@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class ActionEvent : MonoBehaviour
+    namespace General
     {
-        public UnityEvent action;
-    }
+        public class ActionEvent : MonoBehaviour
+        {
+            public UnityEvent action;
+        }
+    }   
 }

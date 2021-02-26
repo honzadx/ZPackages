@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    [RequireComponent(typeof(ActionEvent))]
-    public class InteractionTrigger : MonoBehaviour
+    namespace General
     {
-        private ActionEvent ae;
-
-        private void Start()
+        [RequireComponent(typeof(ActionEvent))]
+        public class InteractionTrigger : MonoBehaviour
         {
-            ae = GetComponent<ActionEvent>();
-        }
+            private ActionEvent ae;
 
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log($"'{gameObject.name}': ActionEvent called via Trigger hit from '{other.gameObject.name}'!");
-            ae.action?.Invoke();
+            private void Start()
+            {
+                ae = GetComponent<ActionEvent>();
+            }
+
+            private void OnTriggerEnter(Collider other)
+            {
+                Debug.Log($"'{gameObject.name}': ActionEvent called via Trigger hit from '{other.gameObject.name}'!");
+                ae.action?.Invoke();
+            }
         }
     }
 }

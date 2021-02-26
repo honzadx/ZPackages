@@ -3,45 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class Health : MonoBehaviour
+    namespace General
     {
-        public float maxHealth;
-        public float health;
-        public bool invulnerable;
-
-        public System.Action<float> healthValueChanged;
-
-        public UnityEvent damage;
-        public UnityEvent heal;
-        public UnityEvent death;
-
-        public void Kill()
+        public class Health : MonoBehaviour
         {
-            death?.Invoke();
-        }
+            public float maxHealth;
+            public float health;
+            public bool invulnerable;
 
-        public void Damage(float damageAmount)
-        {
-            if (invulnerable)
-                return;
+            public System.Action<float> healthValueChanged;
 
-            health -= damageAmount;
-            damage?.Invoke();
-            healthValueChanged?.Invoke(health);
+            public UnityEvent damage;
+            public UnityEvent heal;
+            public UnityEvent death;
 
-            if (health <= 0)
+            public void Kill()
             {
-                Kill();
+                death?.Invoke();
+            }
+
+            public void Damage(float damageAmount)
+            {
+                if (invulnerable)
+                    return;
+
+                health -= damageAmount;
+                damage?.Invoke();
+                healthValueChanged?.Invoke(health);
+
+                if (health <= 0)
+                {
+                    Kill();
+                }
+            }
+
+            public void Heal(float healAmount)
+            {
+                health = Mathf.Min(health + healAmount, maxHealth);
+                heal?.Invoke();
+                healthValueChanged?.Invoke(health);
             }
         }
-
-        public void Heal(float healAmount)
-        {
-            health = Mathf.Min(health + healAmount, maxHealth);
-            heal?.Invoke();
-            healthValueChanged?.Invoke(health);
-        } 
     }
 }

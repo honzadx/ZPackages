@@ -2,28 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class FollowTarget : MonoBehaviour
+    namespace General
     {
-        public Transform follower;
-        public Transform target;
-        public FollowSettingsSO followPositionSettings;
-        public FollowSettingsSO followRotationSettings;
-        public float extraMtp = 1;
-
-        private void Start()
+        public class FollowTarget : MonoBehaviour
         {
-            if(follower == null)
+            public Transform follower;
+            public Transform target;
+            public FollowSettingsSO followPositionSettings;
+            public FollowSettingsSO followRotationSettings;
+            public float positionMtp = 1;
+            public float rotationMtp = 1;
+
+            private void Awake()
             {
-                follower = transform;
+                if (follower == null)
+                {
+                    follower = transform;
+                }
             }
-        }
 
-        private void Update()
-        {
-            followPositionSettings?.FollowPosition(Time.deltaTime, follower, target, extraMtp);
-            followRotationSettings?.FollowRotation(Time.deltaTime, follower, target, extraMtp);
+            private void Update()
+            {
+                followPositionSettings?.FollowPosition(Time.deltaTime, follower, target, positionMtp);
+                followRotationSettings?.FollowRotation(Time.deltaTime, follower, target, rotationMtp);
+            }
         }
     }
 }

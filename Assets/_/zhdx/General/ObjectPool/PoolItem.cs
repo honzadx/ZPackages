@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class PoolItem : MonoBehaviour
+    namespace General
     {
-        private ObjectPool origin;
-        public void SetOrigin(ObjectPool origin) => this.origin = origin;
-
-        private void OnDisable()
+        public class PoolItem : MonoBehaviour
         {
-            if (gameObject != null && origin != null)
+            private ObjectPool origin;
+            public void SetOrigin(ObjectPool origin) => this.origin = origin;
+
+            private void OnDisable()
             {
-                origin.ReturnItem(this);
+                if (gameObject != null && origin != null)
+                {
+                    origin.ReturnItem(this);
+                }
             }
         }
     }

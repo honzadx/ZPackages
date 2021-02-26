@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace zhdx.Subsystems
+namespace zhdx
 {
-    public abstract class ManagerSO : ScriptableObject
+    namespace Subsystems
     {
-        public abstract bool InitializeOnEditMode();
+        public abstract class ManagerSO : ScriptableObject
+        {
+            public abstract bool InitializeOnEditMode();
 
-        public abstract void Initialize();
+            public abstract void Initialize();
 
-        public bool AbleToInitialize() => InitializeOnEditMode() || Application.isPlaying;
+            public bool AbleToInitialize() => InitializeOnEditMode() || Application.isPlaying;
+        }
     }
 }

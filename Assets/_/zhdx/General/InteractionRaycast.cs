@@ -2,73 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    public class InteractionRaycast : MonoBehaviour
+    namespace General
     {
-        [SerializeField]
-        private Camera _camera = null;
-        [SerializeField]
-        private float distance = 0;
-        [SerializeField]
-        private LayerMask layerMask = 0;
-
-        private void OnEnable()
+        public class InteractionRaycast : MonoBehaviour
         {
-            if(_camera == null)
-            {
-                _camera = Camera.main;
-            }
-        }
+            [SerializeField]
+            private Camera _camera = null;
+            [SerializeField]
+            private float distance = 0;
+            [SerializeField]
+            private LayerMask layerMask = 0;
 
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
+            private void OnEnable()
             {
-                CastRay(GetMouseRay());
-            }
-
-            if (Input.touchCount > 0)
-            {
-                foreach (Ray touchRay in GetTouchRays())
+                if (_camera == null)
                 {
-                    CastRay(touchRay);
+                    _camera = Camera.main;
                 }
             }
 
-        }
-
-        private void CastRay(Ray ray)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, distance, layerMask))
+            private void Update()
             {
-                ActionEvent ae = hit.collider.GetComponent<ActionEvent>();
-                if(ae != null)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log($"'{ae.gameObject.name}': ActionEvent called via Raycast hit from '{gameObject.name}'!");
-                    ae.action?.Invoke();
+                    CastRay(GetMouseRay());
+                }
+
+                if (Input.touchCount > 0)
+                {
+                    foreach (Ray touchRay in GetTouchRays())
+                    {
+                        CastRay(touchRay);
+                    }
+                }
+
+            }
+
+            private void CastRay(Ray ray)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, distance, layerMask))
+                {
+                    ActionEvent ae = hit.collider.GetComponent<ActionEvent>();
+                    if (ae != null)
+                    {
+                        Debug.Log($"'{ae.gameObject.name}': ActionEvent called via Raycast hit from '{gameObject.name}'!");
+                        ae.action?.Invoke();
+                    }
                 }
             }
-        }
 
-        private Ray GetMouseRay()
-        {
-            return _camera.ScreenPointToRay(Input.mousePosition);
-        }
-
-        private List<Ray> GetTouchRays()
-        {
-            List<Ray> rays = new List<Ray>();
-            for (int i = 0; i < Input.touchCount; i++)
+            private Ray GetMouseRay()
             {
-                if (Input.GetTouch(i).phase == TouchPhase.Began)
-                {
-                    rays.Add(_camera.ScreenPointToRay(Input.GetTouch(i).position));
-                }
+                return _camera.ScreenPointToRay(Input.mousePosition);
             }
-            return rays;
+
+            private List<Ray> GetTouchRays()
+            {
+                List<Ray> rays = new List<Ray>();
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    if (Input.GetTouch(i).phase == TouchPhase.Began)
+                    {
+                        rays.Add(_camera.ScreenPointToRay(Input.GetTouch(i).position));
+                    }
+                }
+                return rays;
+            }
         }
     }
-
 }

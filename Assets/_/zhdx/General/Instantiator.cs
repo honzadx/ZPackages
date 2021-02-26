@@ -1,27 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Instantiator : MonoBehaviour
+namespace zhdx
 {
-    [System.Serializable]
-    public struct PrefabLink
+    namespace General
     {
-        public string id;
-        public GameObject prefab;
-        public Transform parent;
-    }
-
-    [SerializeField]
-    private List<PrefabLink> prefabLinks = null;
-
-    public void Instantiate(string id)
-    {
-        for(int i = 0; i < prefabLinks.Count; i++)
+        public class Instantiator : MonoBehaviour
         {
-            var prefabLink = prefabLinks[i];
-            if (prefabLink.id != id)
-                continue;
-            Instantiate(prefabLink.prefab, transform.position, transform.rotation, prefabLink.parent);
+            [System.Serializable]
+            public struct PrefabLink
+            {
+                public string id;
+                public GameObject prefab;
+                public Transform parent;
+            }
+
+            [SerializeField]
+            private List<PrefabLink> prefabLinks = null;
+
+            public void Instantiate(string id)
+            {
+                for (int i = 0; i < prefabLinks.Count; i++)
+                {
+                    var prefabLink = prefabLinks[i];
+                    if (prefabLink.id != id)
+                        continue;
+                    Instantiate(prefabLink.prefab, transform.position, transform.rotation, prefabLink.parent);
+                }
+            }
         }
     }
 }

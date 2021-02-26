@@ -1,14 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace zhdx.Subsystems.SceneManagement
+namespace zhdx
 {
-    public class LastScene : MonoBehaviour
+    namespace Subsystems
     {
-        public void Load()
+        namespace SceneManagement
         {
-            SceneManagerSO.Instance.LoadLast();
+            public class LastScene : MonoBehaviour
+            {
+                public void Load()
+                {
+                    SceneManagerSO.Instance.LoadLast();
+                }
+            }
         }
     }
 }

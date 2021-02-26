@@ -1,15 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace zhdx.Subsystems.SceneManagement
+namespace zhdx
 {
-    public class RestartScene : MonoBehaviour
+    namespace Subsystems
     {
-        public void Load()
+        namespace SceneManagement
         {
-            SceneManagerSO.Instance.Reload();
+            public class RestartScene : MonoBehaviour
+            {
+                public void Load()
+                {
+                    SceneManagerSO.Instance.Reload();
+                }
+            }
         }
     }
-
 }

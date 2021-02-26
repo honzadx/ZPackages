@@ -2,66 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    [ExecuteAlways]
-    public class OneActive : MonoBehaviour
+    namespace General
     {
-        public void Awake()
+        [ExecuteAlways]
+        public class OneActive : MonoBehaviour
         {
-            for (int i = 0; i < transform.childCount; ++i)
+            public void Awake()
             {
-                var child = transform.GetChild(i).gameObject;
-                if (!child.GetComponent<OneActiveTag>())
+                for (int i = 0; i < transform.childCount; ++i)
                 {
-                    child.AddComponent<OneActiveTag>();
-                    var tag = child.GetComponent<OneActiveTag>();
+                    var child = transform.GetChild(i).gameObject;
+                    if (!child.GetComponent<OneActiveTag>())
+                    {
+                        child.AddComponent<OneActiveTag>();
+                        var tag = child.GetComponent<OneActiveTag>();
+                    }
+                }
+
+                SetTagActive(0);
+            }
+
+            public void SetTagActive(int siblingIndex)
+            {
+                for (int i = 0; i < transform.childCount; ++i)
+                {
+                    if (i != siblingIndex)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        transform.GetChild(i).gameObject.SetActive(true);
+                    }
                 }
             }
 
-            SetTagActive(0);
-        }
-
-        public void SetTagActive(int siblingIndex)
-        {
-            for (int i = 0; i < transform.childCount; ++i)
+            public void ActivateNext()
             {
-                if (i != siblingIndex)
-                {
-                    transform.GetChild(i).gameObject.SetActive(false);
-                }
-                else
-                {
-                    transform.GetChild(i).gameObject.SetActive(true);
-                }
+                int index = GetCurrentTagIndex();
+                index = index + 1 >= transform.childCount ? 0 : index + 1;
+                SetTagActive(index);
             }
-        }
 
-        public void ActivateNext()
-        {
-            int index = GetCurrentTagIndex();
-            index = index + 1 >= transform.childCount ? 0 : index + 1;
-            SetTagActive(index);
-        }
-
-        public void ActivatePrevious()
-        {
-            int index = GetCurrentTagIndex();
-            index = index - 1 < 0 ? transform.childCount - 1 : index +- 1;
-            SetTagActive(index);
-        }
-
-        public int GetCurrentTagIndex()
-        {
-            for (int i = 0; i < transform.childCount; ++i)
+            public void ActivatePrevious()
             {
-                if (transform.GetChild(i).gameObject.activeInHierarchy)
-                {
-                    return i;
-                }
+                int index = GetCurrentTagIndex();
+                index = index - 1 < 0 ? transform.childCount - 1 : index + -1;
+                SetTagActive(index);
             }
-            return 0;
+
+            public int GetCurrentTagIndex()
+            {
+                for (int i = 0; i < transform.childCount; ++i)
+                {
+                    if (transform.GetChild(i).gameObject.activeInHierarchy)
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
         }
     }
-
 }

@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zhdx.General
+namespace zhdx
 {
-    [ExecuteAlways]
-    [DisallowMultipleComponent]
-    public class OneActiveTag : MonoBehaviour
+    namespace General
     {
-        private OneActive origin;
-        public void SetOrigin(OneActive origin) => this.origin = origin;
-
-        private void OnEnable()
+        [ExecuteAlways]
+        [DisallowMultipleComponent]
+        public class OneActiveTag : MonoBehaviour
         {
-            var siblingIndex = transform.GetSiblingIndex();
+            private OneActive origin;
+            public void SetOrigin(OneActive origin) => this.origin = origin;
 
-            origin = transform.parent.GetComponent<OneActive>();
-            if (origin == null)
+            private void OnEnable()
             {
-                StripActiveTag();
-                return;
+                var siblingIndex = transform.GetSiblingIndex();
+
+                origin = transform.parent.GetComponent<OneActive>();
+                if (origin == null)
+                {
+                    StripActiveTag();
+                    return;
+                }
+
+                origin.SetTagActive(siblingIndex);
             }
 
-            origin.SetTagActive(siblingIndex);
-        }
-
-        public void StripActiveTag()
-        {
-            if (Application.isPlaying)
+            public void StripActiveTag()
             {
-                Destroy(this);
-            }
-            else
-            {
-                DestroyImmediate(this);
+                if (Application.isPlaying)
+                {
+                    Destroy(this);
+                }
+                else
+                {
+                    DestroyImmediate(this);
+                }
             }
         }
     }

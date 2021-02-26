@@ -1,91 +1,120 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
-namespace zhdx.Subsystems.Translation
+namespace zhdx
 {
-    public class TranslateLink : MonoBehaviour
+    namespace Subsystems
     {
-        [System.Serializable]
-        public struct TranslateText
+        namespace Translation
         {
-            public string id;
-            public GameObject textObject;
-            public UITextType textType;
-            public bool idChecked;
-            public bool typeChecked;
-            public bool keyExists;
-        }
-
-        public List<TranslateText> translateTexts = null;
-
-        #region ONPLAY_FUNCTIONS
-
-        private void Start()
-        {
-            UpdateTexts(TranslationCatalogManagerSO.Instance);
-        }
-
-        private void OnEnable()
-        {
-            TranslationCatalogManagerSO.Instance.LanguageChanged += OnLanguageChanged;
-        }
-
-        private void OnDisable()
-        {
-            var translationManager = TranslationCatalogManagerSO.Instance;
-            if (translationManager != null)
-                translationManager.LanguageChanged -= OnLanguageChanged;
-        }
-
-        private void OnLanguageChanged()
-        {
-            if (this != null)
+            public class TranslateLink : MonoBehaviour
             {
-                UpdateTexts(TranslationCatalogManagerSO.Instance);
-            }
-        }
-
-        private void UpdateTexts(TranslationCatalogManagerSO translationManager)
-        {
-            foreach (TranslateText tT in translateTexts)
-            {
-                var text = translationManager.Translate(tT.id);
-                switch (tT.textType)
+                [System.Serializable]
+                public struct TranslateText
                 {
-                    case UITextType.TextMeshProUGUI:
-                        tT.textObject.GetComponent<TextMeshProUGUI>().text = text;
-                        break;
-                    case UITextType.TextMeshPro:
-                        tT.textObject.GetComponent<TextMeshPro>().text = text;
-                        break;
+                    public string id;
+                    public GameObject textObject;
+                    public UITextType textType;
+                    public bool idChecked;
+                    public bool typeChecked;
+                    public bool keyExists;
                 }
+
+                public List<TranslateText> translateTexts = null;
+
+                public TranslationCatalogManagerSO translationCatalogManager;
+
+                #region ONPLAY_FUNCTIONS
+
+                private void Start()
+                {
+                    StartCoroutine(Fetch());
+                }
+
+                private IEnumerator Fetch()
+                {
+                    while(TranslationCatalogManagerSO.Instance == null)
+                    {
+                        yield return null;
+                    }
+                    translationCatalogManager = TranslationCatalogManagerSO.Instance;
+                    translationCatalogManager.LanguageChanged += OnLanguageChanged;
+                    UpdateTexts();
+                }
+
+                private void OnDisable()
+                {
+                    if (translationCatalogManager != null)
+                        translationCatalogManager.LanguageChanged -= OnLanguageChanged;
+                }
+
+                private void OnLanguageChanged()
+                {
+                    if (this != null)
+                    {
+                        UpdateTexts();
+                    }
+                }
+
+                private void UpdateTexts(bool editor = false)
+                {
+                    for (int i = 0; i < translateTexts.Count; ++i)
+                    {
+                        var tT = translateTexts[i];
+                        var text = translationCatalogManager.Translate(tT.id);
+                        switch (tT.textType)
+                        {
+                            case UITextType.TextMeshProUGUI:
+                                tT.textObject.GetComponent<TextMeshProUGUI>().text = text;
+                                break;
+                            case UITextType.TextMeshPro:
+                                tT.textObject.GetComponent<TextMeshPro>().text = text;
+                                break;
+                        }
+                    }
+                }
+
+                #endregion //ONPLAY_FUNCTIONS
+
+                #region EDITOR_FUNCTIONS
+#if UNITY_EDITOR
+                public void EditorUpdateTexts()
+                {
+                    var guids = EditorGetManagerGUIDs();
+                    if (guids == null || guids.Length == 0)
+                        return;
+
+                    var guid = guids[0];
+                    var path = AssetDatabase.GUIDToAssetPath(guid);
+                    translationCatalogManager = (TranslationCatalogManagerSO)AssetDatabase.LoadAssetAtPath(path, typeof(TranslationCatalogManagerSO));
+                    UpdateTexts(true);
+                    translationCatalogManager = null;
+                }
+
+                public void EditorAdd()
+                {
+                    if (translateTexts == null)
+                        translateTexts = new List<TranslateText>();
+
+                    translateTexts.Add(new TranslateText());
+                }
+
+                public void EditorRemoveAt(int index)
+                {
+                    translateTexts.RemoveAt(index);
+                }
+
+                public string[] EditorGetManagerGUIDs()
+                {
+                    var assetSearch = "t:TranslationCatalogManagerSO";
+                    return AssetDatabase.FindAssets(assetSearch);
+                }
+#endif
+                #endregion // EDITOR_FUNCTIONS
             }
         }
-
-        #endregion //ONPLAY_FUNCTIONS
-
-        #region EDITOR_FUNCTIONS
-        internal void EditorUpdateTexts()
-        {
-            var translationManager = FindObjectOfType<TranslationCatalogManagerSO>();
-            UpdateTexts(translationManager);
-        }
-
-        internal void EditorAdd()
-        {
-            if (translateTexts == null)
-                translateTexts = new List<TranslateText>();
-
-            translateTexts.Add(new TranslateText());
-        }
-
-        internal void EditorRemoveAt(int index)
-        {
-            translateTexts.RemoveAt(index);
-        }
-        #endregion // EDITOR_FUNCTIONS
     }
 }
-

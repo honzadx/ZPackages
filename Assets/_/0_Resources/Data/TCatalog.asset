@@ -16,12 +16,6 @@ MonoBehaviour:
   - en
   - cz
   translations:
-  - id: audio
-    languageTexts:
-    - language: en
-      text: Audio
-    - language: cz
-      text: Zvuk
   - id: return
     languageTexts:
     - language: en
@@ -40,18 +34,6 @@ MonoBehaviour:
       text: English
     - language: cz
       text: "\u010Ce\u0161tina"
-  - id: renew
-    languageTexts:
-    - language: en
-      text: Renew
-    - language: cz
-      text: Obnov
-  - id: changelang
-    languageTexts:
-    - language: en
-      text: Chane language
-    - language: cz
-      text: "Zm\u011Bnit jazyk"
   - id: next
     languageTexts:
     - language: en
@@ -70,3 +52,45 @@ MonoBehaviour:
       text: Restart
     - language: cz
       text: Restartovat
+  - id: ui_window_level_selection
+    languageTexts:
+    - language: en
+      text: Level selection
+    - language: cz
+      text: "V\xFDb\u011Br \xFArovn\u011B"
+  - id: ui_window_movement
+    languageTexts:
+    - language: en
+      text: Movement
+    - language: cz
+      text: Pohyb
+  - id: ui_player
+    languageTexts:
+    - language: en
+      text: Player
+    - language: cz
+      text: "P\u0159ehr\xE1va\u010D"
+  - id: settings
+    languageTexts:
+    - language: en
+      text: Settings
+    - language: cz
+      text: "Nastaven\xED"
+  - id: lorem_1
+    languageTexts:
+    - language: en
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+        odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis
+        sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce
+        nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu
+        eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+        per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim
+        lacinia nunc. '
+    - language: cz
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+        odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis
+        sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce
+        nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu
+        eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+        per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim
+        lacinia nunc. '
